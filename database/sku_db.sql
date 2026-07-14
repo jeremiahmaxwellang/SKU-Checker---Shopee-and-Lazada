@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `sku_db`.`lazada_products` (
   `sku_id` VARCHAR(100) NULL,
   `status` VARCHAR(100) NULL,
   `shop_sku` VARCHAR(100) NULL,
+  `seller_sku` VARCHAR(100) NULL,
   `quantity` INT NULL,
   `special_price` DECIMAL(10,2) NULL,
   `special_price_start` DATETIME NULL,

@@ -41,18 +41,19 @@
             fields: {
                 product_id: ["product id", "productid", "itemid", "item id"],
                 catId: ["catid", "category id", "cat id"],
-                product_name: ["product name", "item name", "name"],
-                currency: ["currency"],
-                sku_id: ["sellersku", "seller sku", "sku id"],
+                product_name: ["product name"],
+                currency: ["currencyCode", "currency"],
+                sku_id: ["sku.skuId" , "sku id"],
                 status: ["status"],
                 shop_sku: ["shopsku", "shop sku"],
+                seller_sku: ["sellersku", "seller sku"],
                 quantity: ["quantity", "stock", "qty"],
-                special_price: ["special price"],
+                special_price: ["special price", "SpecialPrice"],
                 special_price_start: ["special price start"],
                 special_price_end: ["special price end"],
                 price: ["price"],
-                variations_combo: ["variation", "variations", "variations combo"],
-                tr: ["tr"]
+                variations_combo: ["Variations Combo"],
+                tr: ["tr", "tr(s-wb-product@md5key)"]
             },
             required: ["product_id"]
         },

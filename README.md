@@ -1,5 +1,13 @@
 # SKU Checker - Shopee and Lazada
 
+## How to use:
+
+### 1. Importing Shopee Products
+- Remove top 2 rows from generated Excel sheet before importing
+
+### 2. Importing Product List
+- Use the following fields: sku, product name, category name
+
 ## Getting Started
 
 ### Dependencies

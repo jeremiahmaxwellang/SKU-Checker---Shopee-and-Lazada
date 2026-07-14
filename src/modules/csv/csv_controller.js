@@ -142,6 +142,7 @@ exports.importLazadaProducts = async (req, res) => {
                 sku_id: toNullable(r.sku_id),
                 status: toNullable(r.status),
                 shop_sku: toNullable(r.shop_sku),
+                seller_sku: toNullable(r.seller_sku),
                 quantity: toInt(r.quantity),
                 special_price: toDecimal(r.special_price),
                 special_price_start: toDatetime(r.special_price_start),
@@ -161,13 +162,13 @@ exports.importLazadaProducts = async (req, res) => {
 
         const values = cleanRows.map((r) => [
             r.product_id, r.catId, r.product_name, r.currency, r.sku_id, r.status,
-            r.shop_sku, r.quantity, r.special_price, r.special_price_start,
+            r.shop_sku, r.seller_sku, r.quantity, r.special_price, r.special_price_start,
             r.special_price_end, r.price, r.variations_combo, r.tr
         ]);
 
         await db.query(
             `INSERT INTO lazada_products
-                (product_id, catId, product_name, currency, sku_id, status, shop_sku,
+                (product_id, catId, product_name, currency, sku_id, status, shop_sku, seller_sku,
                  quantity, special_price, special_price_start, special_price_end,
                  price, variations_combo, tr)
              VALUES ?
@@ -178,6 +179,7 @@ exports.importLazadaProducts = async (req, res) => {
                 sku_id = VALUES(sku_id),
                 status = VALUES(status),
                 shop_sku = VALUES(shop_sku),
+                seller_sku = VALUES(seller_sku),
                 quantity = VALUES(quantity),
                 special_price = VALUES(special_price),
                 special_price_start = VALUES(special_price_start),
