@@ -1,0 +1,601 @@
+@import url('vars.css');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Start of player_analysis styles */
+/* Global styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevents horizontal overflow */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    background-color: var(--porcelain); /* Background color from Figma variables */
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: fit-content;
+    background-color: var(--carbon-black); /* Sidebar background color from Figma variables */
+    padding: 10px;
+    height: auto;
+    flex-shrink: 0; /* Prevents sidebar from shrinking */
+}
+
+.sidebar ul {
+    list-style-type: none; /* Removes default list bullets */
+    padding: 0;
+    margin: 0; /* Removes default margin */
+}
+
+.sidebar ul li {
+    text-align: center; /* Ensures the text is centered if there's text next to the image */
+}
+
+.sidebar ul li a {
+    margin-bottom: 20px;
+    color: var(--porcelain); /* Default text color */
+    text-decoration: none; /* Removes underline from links */
+    display: flex; /* Make <a> a flex container */
+    flex-direction: column; /* Stack the image and text vertically */
+    align-items: center; /* Center the content inside the link */
+    justify-content: center; /* Ensure items are centered inside the <a> */
+    width: 150px;
+}
+
+.sidebar ul li a img {
+    width: 25%; /* Adjust image size */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 5px; /* Space between image and text */
+    transition: filter 0.3s ease; /* Smooth transition for the image */
+}
+
+.sidebar ul li a:hover {
+    background-color: #f0f0f0; /* Hover effect */
+    border-radius: 5px;
+    color: var(--carbon-black); /* Invert text color on hover */
+}
+
+.sidebar ul li a:hover img {
+    filter: invert(1); /* Inverts the color of the logo image */
+}
+
+/* Main content styles */
+.main-content {
+    flex-grow: 1; /* Allows the main content to take the remaining space */
+    background-color: var(--gunmetal); /* Main content background color */
+}
+
+/* Adjust layout of sidebar and main content */
+.content-wrapper {
+    display: flex;
+    width: 100%;
+    flex: 1;
+}
+
+header h1, header h2 {
+    margin: 0;
+    color: var(--gunmetal);
+}
+
+.header_title {
+    font-family: var(--font-road-rage); /* Using the Road Rage font */
+    font-size: 36px;
+    margin-left: 30px;
+    color: var(--porcelain);
+}
+
+.header_container {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--carbon-black); /* Dark background similar to the image */
+    padding: 5px 20px;
+    color: var(--porcelain); /* Text color */
+}
+
+.header_container .logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.header_container .logo img{
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    margin-left: 20px;
+}
+
+.header_container .team-name {
+    font-size: 24px;
+    color: var(--porcelain); 
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.header_container .profile-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--iron-gray); /* Placeholder background for profile icon */
+}
+
+/* Player Profile Details Section */
+.player_info_section {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Left Rectangle Container Column */
+.player-info {
+    margin: 20px 20px 0;
+    padding: 20px;
+    background-color: #2f3136;
+    border-radius: 20px;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.player-info .player-details {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #fff;
+    padding-right: 15px;
+}
+
+.player-info .profile_with_details {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.player-info .player-details h3 {
+    font-size: 24px;
+    margin: 0;
+    color: var(--porcelain);
+}
+
+.player-info .player-details p {
+    margin: 0px;
+    padding: 5px 0;
+    color: var(--porcelain);
+}
+
+.player_contact {
+    margin-top: 0;
+    border-right: 1px solid #fff;
+    padding-right: 15px;
+}
+
+.player_contact h3 {
+    font-size: 20px;
+    padding-bottom: 5px;
+    margin: 0;
+    color: var(--porcelain);
+}
+
+.player_contact p {
+    margin: 0;
+    padding-bottom: 5px;
+    color: var(--porcelain);
+}
+
+/* Styles for Selected Player Dropdown */
+.player-dropdown {
+    position: relative;
+    display: inline-block;
+    color: var(--porcelain);
+}
+
+.player-dropdown-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--porcelain);
+    cursor: pointer;
+}
+
+.player-dropdown-btn::after {
+    content: " ▾";
+    font-size: 36px;
+}
+
+.player-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    min-width: 220px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+.player-dropdown-menu a {
+    display: block;
+    padding: 10px 14px;
+    text-decoration: none;
+    color: var(--carbon-black);
+    font-size: 14px;
+}
+
+.player-dropdown-menu a:hover {
+    background-color: #f2f2f2;
+}
+
+/* Show dropdown on hover */
+.player-dropdown:hover .player-dropdown-menu {
+    display: block;
+}
+
+/* Left Column for Player Details, Rank, and Student Information */
+.rank_and_student_info {
+    margin: 0;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.rank_container {
+    margin: 0;
+    padding: 0 0 0 20px;
+    background-color: transparent;
+    border-radius: 0;
+    border-left: 1px solid #fff;
+    align-self: stretch;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 10px;
+
+    width: fit-content;
+    min-width: 210px;
+    color: var(--porcelain);
+}
+
+.rank_container .rank_row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+.rank_container .rank_text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+}
+
+.rank_container .rank_text h3,
+.rank_container .rank_text p {
+    margin: 0;
+    padding: 0;
+    color: var(--porcelain);
+}
+
+.rank_container .rank_text h3 {
+    font-size: 24px;
+}
+
+.rank_container .rank_text p {
+    font-size: 18px;
+}
+
+.rank_container .rank_divider {
+    width: 100%;
+    height: 1px;
+    flex-shrink: 0;
+    background-color: rgba(255, 255, 255, 0.65);
+}
+
+.rank_container .rank_icon {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.vertical_line {
+  width: 5px;
+    background-color: var(--porcelain);
+  height: 100%; /* Adjust the height as needed */
+}
+
+.rank_icon {
+    height: 90px;
+    width: 90px;
+}
+
+/* Student's Information */
+/* Bottom Container for Left S1ide */
+.student_info_container {
+    background-color: #2f3136;
+    border-radius: 20px;
+    height: auto;
+    width: auto;
+    display: inline-block;
+}
+
+.student_info_container h3 {
+    font-size: 24px;
+    padding: 5px 0;
+    margin: 0;
+    color: var(--porcelain);
+}
+
+.student_info_container p {
+    margin: 0;
+    padding: 5px 0;
+    color: var(--porcelain);
+}
+
+.player-info .student_info_container {
+    padding-top: 12px;
+    background-color: transparent;
+    border-radius: 0;
+    display: block;
+    width: auto;
+    box-sizing: border-box;
+}
+
+/* Styles of the Tabs for Details Section */
+/* Tabs bar */
+.tabs {
+  margin-top: 20px;
+}
+
+.tabs ul {
+  list-style: none;
+  display: flex;
+  gap: 0;               /* we'll use separators instead */
+  padding: 0;
+  margin: 0;
+  align-items: center;
+}
+
+/* Each tab item */
+.tabs li {
+  position: relative;
+  padding: 0 10px;
+}
+
+.tabs li:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  background-color: var(--carbon-black);
+}
+
+/* Tab links */
+.tabs a {
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+/* Base underline (hidden by default) */
+.tabs a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background-color: #fff;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+/* Show underline on hover */
+.tabs a:hover::after {
+  transform: scaleX(1);
+}
+
+/* Keep underline on active tab */
+.tabs a.active::after {
+  transform: scaleX(1);
+}
+
+/* Overview overlay styles moved to public/css/overview.css */
+
+/* Dropdown Button Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-btn {
+    color: var(--carbon-black);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 21px;
+    cursor: pointer;
+    border: none;
+}
+
+/* Adding an upside-down triangle (caret) next to the button */
+.dropdown-btn::after {
+    content: "▼"; /* Unicode character for the downwards triangle */
+    margin-left: 5px; /* Space between text and triangle */
+    font-size: 12px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 1;
+    border-radius: 5px;
+    box-shadow: 0px 8px 16px var(--carbon-black);
+    margin-top: 5px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.hidden-input {
+    visibility: hidden;
+}
+
+.candidate-favorite-wrap .candidate_role_label {
+    font-size: 16px;
+    color: var(--porcelain);
+}
+
+.candidate-favorite-wrap .candidate_role_dropdown_ {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--porcelain);
+    cursor: pointer;
+    width: fit-content;
+    min-width: 190px;
+    height: 34px;
+    border-radius: 10px;
+}
+
+.candidate-favorite-wrap .candidate_role_dropdown_ option {
+    color: var(--carbon-black);
+    border-radius: 10px;
+}
+
+.candidate-favorite-wrap .candidate_message {
+    margin: 0;
+    font-size: 12px;
+    color: var(--porcelain);
+}
+
+/* --- Profile Dropdown Styling --- */
+.profile-dropdown-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.profile-dropdown-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    right: 0;
+    top: 75px; /* Pushes it just below the profile icon */
+    background-color: #ffffff;
+    min-width: 180px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+    overflow: hidden;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.readonly-player-display {
+  pointer-events: none;
+  opacity: 1;
+  cursor: default;
+}
+
+.profile-dropdown-menu a {
+    display: block;
+    padding: 14px 18px;
+    color: #111111;
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease;
+}
+
+.profile-dropdown-menu a:hover {
+    background-color: #f7f7f7;
+}
+
+.profile-dropdown-menu a:last-child {
+    border-bottom: none;
+}
+
+.profile-dropdown-menu .logout-link {
+    color: #e53935;
+}
+
+.profile-dropdown-menu .logout-link:hover {
+    background-color: #fdecea;
+}
+
+.profile-dropdown-menu a:hover {
+    background-color: #3a3e44; /* Lighter hover state */
+}
+
+.calendar-page-link {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.calendar-page-link:hover {
+    color: #00f2c3;
+}
+
+@media (max-width: 1100px) {
+    .player-info > .rank_container {
+        flex-basis: auto;
+        width: fit-content;
+        min-width: 210px;
+
+        border-left: 1px solid #fff;
+        border-top: none;
+        padding: 0 0 0 20px;
+    }
+}

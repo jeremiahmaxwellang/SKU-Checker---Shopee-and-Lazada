@@ -67,10 +67,12 @@ ENGINE = InnoDB;
 -- Table `sku_db`.`my_products`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sku_db`.`my_products` (
-  `sku` VARCHAR(45) NOT NULL,
+  `product_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `sku` VARCHAR(45) NULL,
   `product_name` VARCHAR(45) NULL,
+  `category_name` VARCHAR(45) NULL,
   `category_id` INT NULL COMMENT 'Grinder, Brewer, Dripper, Cup, Kettle, Scale, Accessories, Set, Electric Grinder, Hopper, Parts, ESP-Accessories, Nuttii, Hiflux',
-  PRIMARY KEY (`sku`),
+  PRIMARY KEY (`product_id`),
   INDEX `fk_my_products_categories_idx` (`category_id` ASC) VISIBLE,
   CONSTRAINT `fk_my_products_categories`
     FOREIGN KEY (`category_id`)

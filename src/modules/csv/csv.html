@@ -7,10 +7,11 @@
     <title>SKU Checker</title>
 
     <!-- Styling -->
+     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/csv/static/csv.css">
 
     <!-- JavaScript -->
-    <!-- <script src="/csv/static/csv.js" defer></script> -->
+    <script src="/csv/static/csv.js" defer></script>
 </head>
 
 <body>
@@ -38,15 +39,19 @@
                         </div>
 
                         <div class="action-buttons">
-                            <button id="editUserBtn" class="action-btn edit-btn">Edit User</button>
-                            <button id="deactivateBtn" class="action-btn deactivate-btn">Deactivate Selected</button>
+                            <!-- <button id="editUserBtn" class="action-btn edit-btn">Edit User</button>
+                            <button id="deactivateBtn" class="action-btn deactivate-btn">Deactivate Selected</button> -->
                             <div class="add-user-dropdown">
-                                <button id="addUserBtn" class="action-btn add-btn">Add User ▾</button>
+                                <button id="addUserBtn" class="action-btn add-btn">Import CSV ▾</button>
+                                <!-- Allows the user to import product data into the DB -->
                                 <div id="addUserDropdown" class="add-user-options" style="display: none;">
-                                    <button class="add-user-option" data-action="upload">Upload CSV File</button>
-                                    <button class="add-user-option" data-action="download">Download CSV
-                                        Template</button>
-                                    <button class="add-user-option" data-action="manual">Manually Register User</button>
+                                    <button class="add-user-option" data-action="upload">Upload My Products CSV File</button> 
+                                    <!-- SKU, Item Name, Category Name (wont use category ID) -->
+
+                                    <button class="add-user-option" data-action="upload">Upload Lazada CSV File</button>
+
+                                    <button class="add-user-option" data-action="upload">Upload Shopee CSV File</button>
+
                                 </div>
                                 <input type="file" id="csvUploadInput" accept=".csv" style="display:none">
                             </div>
