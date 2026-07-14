@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKU Checker</title>
+
+    <!-- Styling -->
+    <link rel="stylesheet" href="/csv/static/csv.css">
+
+    <!-- JavaScript -->
+    <!-- <script src="/csv/static/csv.js" defer></script> -->
+</head>
+
+<body>
+    <div class="manager-page">
+
+        <div class="manager-content-wrapper">
+
+            <div class="manager-main-content">
+                <div class="team-management-container">
+                    <!-- Header -->
+                    <div class="team-management-header">
+                        <h1>CSV Checker</h1>
+                    </div>
+
+                    <!-- Controls Section -->
+                    <div class="controls-section">
+                        <div class="filter-group">
+                            <button id="filterBtn" class="filter-btn">Filter: All</button>
+                            <div id="filterDropdown" class="filter-dropdown" style="display: none;">
+                                <button class="filter-option" data-filter="all">All</button>
+                                <button class="filter-option" data-filter="active">Active</button>
+                                <button class="filter-option" data-filter="inactive">Inactive</button>
+                                <button class="filter-option" data-filter="deactivated">Deactivated</button>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button id="editUserBtn" class="action-btn edit-btn">Edit User</button>
+                            <button id="deactivateBtn" class="action-btn deactivate-btn">Deactivate Selected</button>
+                            <div class="add-user-dropdown">
+                                <button id="addUserBtn" class="action-btn add-btn">Add User ▾</button>
+                                <div id="addUserDropdown" class="add-user-options" style="display: none;">
+                                    <button class="add-user-option" data-action="upload">Upload CSV File</button>
+                                    <button class="add-user-option" data-action="download">Download CSV
+                                        Template</button>
+                                    <button class="add-user-option" data-action="manual">Manually Register User</button>
+                                </div>
+                                <input type="file" id="csvUploadInput" accept=".csv" style="display:none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Users Table -->
+                    <div class="table-wrapper">
+                        <table class="users-table">
+                            <thead>
+                                <tr>
+                                    <th class="checkbox-col">
+                                        <input type="checkbox" id="selectAllCheckbox">
+                                    </th>
+                                    <th>Full Name</th>
+                                    <th>Riot ID</th>
+                                    <th>Position</th>
+                                    <th>Status</th>
+                                    <th>Email Address</th>
+                                    <th>Discord</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <!-- Users will be populated here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- No Users Message -->
+                    <div id="noUsersMessage" class="no-users-message" style="display: none;">
+                        <p>No users found.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSV Upload Confirmation Modal -->
+        <div id="csvConfirmModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Confirm CSV Upload</h2>
+                    <button class="modal-close" id="modalCloseBtn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p id="uploadCount"></p>
+                    <div id="previewTableContainer" style="overflow-x: auto; margin: 20px 0;">
+                        <table id="previewTable" class="preview-table"></table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="confirmUploadBtn" class="modal-btn confirm-btn">Confirm Upload</button>
+                    <button id="cancelUploadBtn" class="modal-btn cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manual Registration Modal -->
+        <div id="manualRegisterModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Manual User Registration</h2>
+                    <button class="modal-close" id="manualCloseBtn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="manualRegisterForm">
+                        <div class="form-group">
+                            <label>Full Name<span style="color:red;">*</span>:</label>
+                            <input type="text" id="manualFullName" required
+                                style="width:100%;padding:8px;margin:5px 0;" />
+                        </div>
+                        <div class="form-group">
+                            <label>Riot ID:</label>
+                            <input type="text" id="manualRiotId" style="width:100%;padding:8px;margin:5px 0;" />
+                        </div>
+                        <div class="form-group">
+                            <label>Position:</label>
+                            <select id="manualPosition" style="width:100%;padding:8px;margin:5px 0;">
+                                <option>Team Manager</option>
+                                <option>Team Coach</option>
+                                <option selected>Player</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="manualRoleFields">
+                            <label>Primary Role:</label>
+                            <select id="manualPrimaryRoleId" style="width:100%;padding:8px;margin:5px 0;">
+                                <option value="1" selected>Top</option>
+                                <option value="2">Jungle</option>
+                                <option value="3">Mid</option>
+                                <option value="4">AD Carry</option>
+                                <option value="5">Support</option>
+                            </select>
+                            <label>Secondary Role:</label>
+                            <select id="manualSecondaryRoleId" style="width:100%;padding:8px;margin:5px 0;">
+                                <option value="">None</option>
+                                <option value="1">Top</option>
+                                <option value="2">Jungle</option>
+                                <option value="3">Mid</option>
+                                <option value="4">AD Carry</option>
+                                <option value="5">Support</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Status:</label>
+                            <select id="manualStatus" style="width:100%;padding:8px;margin:5px 0;">
+                                <option selected>Active</option>
+                                <option>Inactive</option>
+                                <option>Deactivated</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Email<span style="color:red;">*</span>:</label>
+                            <input type="email" id="manualEmail" required
+                                style="width:100%;padding:8px;margin:5px 0;" />
+                        </div>
+                        <div class="form-group">
+                            <label>Discord:</label>
+                            <input type="text" id="manualDiscord" style="width:100%;padding:8px;margin:5px 0;" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="manualSubmitBtn" class="modal-btn confirm-btn">Register</button>
+                    <button id="manualCancelBtn" class="modal-btn cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit User Modal -->
+        <div id="editUserModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Edit User</h2>
+                    <button class="modal-close" id="editCloseBtn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p id="editUserName" style="margin-bottom: 14px;"></p>
+                    <form id="editUserForm">
+                        <div class="form-group">
+                            <label for="editPosition">Position:</label>
+                            <select id="editPosition" style="width:100%;padding:8px;margin:5px 0;">
+                                <option>Team Manager</option>
+                                <option>Team Coach</option>
+                                <option>Player</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editStatus">Status:</label>
+                            <select id="editStatus" style="width:100%;padding:8px;margin:5px 0;">
+                                <option>Active</option>
+                                <option>Inactive</option>
+                                <option>Deactivated</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="editPlayerFields" style="display:none;">
+                            <label for="editRiotId">Riot ID:</label>
+                            <input type="text" id="editRiotId" placeholder="gameName#tagLine"
+                                style="width:100%;padding:8px;margin:5px 0;" />
+                            <label for="editPrimaryRoleId">Primary Role<span style="color:red;">*</span>:</label>
+                            <select id="editPrimaryRoleId" style="width:100%;padding:8px;margin:5px 0;">
+                                <option value="1">Top</option>
+                                <option value="2">Jungle</option>
+                                <option value="3">Mid</option>
+                                <option value="4">AD Carry</option>
+                                <option value="5">Support</option>
+                            </select>
+                            <label for="editSecondaryRoleId">Secondary Role:</label>
+                            <select id="editSecondaryRoleId" style="width:100%;padding:8px;margin:5px 0;">
+                                <option value="">None</option>
+                                <option value="1">Top</option>
+                                <option value="2">Jungle</option>
+                                <option value="3">Mid</option>
+                                <option value="4">AD Carry</option>
+                                <option value="5">Support</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="editSaveBtn" class="modal-btn confirm-btn">Save</button>
+                    <button id="editCancelBtn" class="modal-btn cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

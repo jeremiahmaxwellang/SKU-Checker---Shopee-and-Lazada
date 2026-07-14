@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-fileupload": "^1.5.2",
+    "express-session": "^1.19.0",
+    "hbs": "^4.2.1",
+    "mysql2": "^3.22.6",
+    "path": "^0.12.7"
+  },
+  "name": "sku-checker---shopee-and-lazada",
+  "version": "1.0.0",
+  "description": "Download here: [https://nodejs.org/en/download](https://nodejs.org/en/download)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
