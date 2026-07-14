@@ -63,6 +63,7 @@
                 product_id: ["product id", "productid"],
                 product_name: ["product name", "name"],
                 variation_id: ["variation id"],
+                variation_name: ["variation name"],
                 parent_sku: ["parent sku"],
                 sku: ["sku"],
                 price: ["price"],

@@ -19,8 +19,9 @@ USE `sku_db` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sku_db`.`shopee_products` (
   `product_id` VARCHAR(100) NOT NULL,
-  `product_name` VARCHAR(100) NULL,
+  `product_name` TEXT NULL,
   `variation_id` VARCHAR(100) NULL,
+  `variation_name` VARCHAR(100) NULL,
   `parent_sku` VARCHAR(100) NULL,
   `sku` VARCHAR(100) NULL,
   `price` DECIMAL(10,2) NULL,
@@ -37,7 +38,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `sku_db`.`lazada_products` (
   `product_id` VARCHAR(100) NOT NULL,
   `catId` VARCHAR(100) NULL,
-  `product_name` VARCHAR(100) NULL,
+  `product_name` TEXT NULL,
   `currency` VARCHAR(100) NULL,
   `sku_id` VARCHAR(100) NULL,
   `status` VARCHAR(100) NULL,
@@ -47,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `sku_db`.`lazada_products` (
   `special_price_start` DATETIME NULL,
   `special_price_end` DATETIME NULL,
   `price` DECIMAL(10,2) NULL,
-  `variations_combo` VARCHAR(100) NULL,
+  `variations_combo` TEXT NULL,
   `tr` VARCHAR(100) NULL,
   PRIMARY KEY (`product_id`))
 ENGINE = InnoDB;

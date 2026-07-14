@@ -220,6 +220,7 @@ exports.importShopeeProducts = async (req, res) => {
                 product_id: toNullable(r.product_id),
                 product_name: toNullable(r.product_name),
                 variation_id: toNullable(r.variation_id),
+                variation_name: toNullable(r.variation_name),
                 parent_sku: toNullable(r.parent_sku),
                 sku: toNullable(r.sku),
                 price: toDecimal(r.price),
@@ -237,17 +238,18 @@ exports.importShopeeProducts = async (req, res) => {
         }
 
         const values = cleanRows.map((r) => [
-            r.product_id, r.product_name, r.variation_id, r.parent_sku,
+            r.product_id, r.product_name, r.variation_id, r.variation_name, r.parent_sku,
             r.sku, r.price, r.gtin, r.stock, r.fail_reason
         ]);
 
         await db.query(
             `INSERT INTO shopee_products
-                (product_id, product_name, variation_id, parent_sku, sku, price, gtin, stock, fail_reason)
+                (product_id, product_name, variation_id, variation_name, parent_sku, sku, price, gtin, stock, fail_reason)
              VALUES ?
              ON DUPLICATE KEY UPDATE
                 product_name = VALUES(product_name),
                 variation_id = VALUES(variation_id),
+                variation_name = VALUES(variation_name),
                 parent_sku = VALUES(parent_sku),
                 sku = VALUES(sku),
                 price = VALUES(price),
