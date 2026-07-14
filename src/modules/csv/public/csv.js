@@ -26,7 +26,7 @@
     // Each entry: dbField -> list of acceptable (normalized) CSV header aliases
     const IMPORT_CONFIGS = {
         "my-products": {
-            endpoint: "/csv/import/my-products",
+            endpoint: "/import/my-products",
             label: "My Products",
             fields: {
                 sku: ["sku"],
@@ -36,7 +36,7 @@
             required: ["sku"]
         },
         "lazada": {
-            endpoint: "/csv/import/lazada",
+            endpoint: "/import/lazada",
             label: "Lazada",
             fields: {
                 product_id: ["product id", "productid", "itemid", "item id"],
@@ -57,7 +57,7 @@
             required: ["product_id"]
         },
         "shopee": {
-            endpoint: "/csv/import/shopee",
+            endpoint: "/import/shopee",
             label: "Shopee",
             fields: {
                 product_id: ["product id", "productid"],
