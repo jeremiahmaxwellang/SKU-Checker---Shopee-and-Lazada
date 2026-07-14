@@ -53,6 +53,33 @@ CREATE TABLE IF NOT EXISTS `sku_db`.`lazada_products` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `sku_db`.`categories`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sku_db`.`categories` (
+  `category_id` INT NOT NULL,
+  `category_name` VARCHAR(45) NULL COMMENT 'Grinder, Brewer, Dripper, Cup, Kettle, Scale, Accessories, Set, Electric Grinder, Hopper, Parts, ESP-Accessories, Nuttii, Hiflux',
+  PRIMARY KEY (`category_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `sku_db`.`my_products`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sku_db`.`my_products` (
+  `sku` VARCHAR(45) NOT NULL,
+  `product_name` VARCHAR(45) NULL,
+  `category_id` INT NULL COMMENT 'Grinder, Brewer, Dripper, Cup, Kettle, Scale, Accessories, Set, Electric Grinder, Hopper, Parts, ESP-Accessories, Nuttii, Hiflux',
+  PRIMARY KEY (`sku`),
+  INDEX `fk_my_products_categories_idx` (`category_id` ASC) VISIBLE,
+  CONSTRAINT `fk_my_products_categories`
+    FOREIGN KEY (`category_id`)
+    REFERENCES `sku_db`.`categories` (`category_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
