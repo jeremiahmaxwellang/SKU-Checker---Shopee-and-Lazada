@@ -7,6 +7,12 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `mydb` ;
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
 -- Schema sku_db
 -- -----------------------------------------------------
@@ -16,6 +22,69 @@ DROP SCHEMA IF EXISTS `sku_db` ;
 -- Schema sku_db
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `sku_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`shopify_products`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`shopify_products` (
+  `index` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `handle` TEXT NULL,
+  `title` TEXT NULL,
+  `body` TEXT NULL,
+  `vendor` TEXT NULL,
+  `product_category` TEXT NULL,
+  `type` TEXT NULL,
+  `tags` TEXT NULL,
+  `published` TEXT NULL,
+  `option1_name` TEXT NULL,
+  `option1_value` TEXT NULL,
+  `option1_linked_to` TEXT NULL,
+  `option2_name` TEXT NULL,
+  `option2_value` TEXT NULL,
+  `option2_linked_to` TEXT NULL,
+  `option3_name` TEXT NULL,
+  `option3_value` TEXT NULL,
+  `option3_linked_to` TEXT NULL,
+  `variant_sku` TEXT NULL,
+  `variant_grams` TEXT NULL,
+  `variant_inventory_tracker` TEXT NULL,
+  `variant_inventory_qty` TEXT NULL,
+  `variant_inventory_policy` TEXT NULL,
+  `variant_fulfillment_service` TEXT NULL,
+  `variant_price` DECIMAL(10,2) NULL,
+  `variant_compare_at_price` TEXT NULL,
+  `variant_requires_shipping` TEXT NULL,
+  `variant_taxable` TEXT NULL,
+  `unit_price_total_measure` TEXT NULL,
+  `unit_price_total_measure_unit` TEXT NULL,
+  `unit_price_base_measure` TEXT NULL,
+  `unit_price_base_measure_unit` TEXT NULL,
+  `variant_barcode` TEXT NULL,
+  `image_src` TEXT NULL,
+  `image_position` TEXT NULL,
+  `image_alt_text` TEXT NULL,
+  `gift_card` TEXT NULL,
+  `seo_title` TEXT NULL,
+  `seo_description` TEXT NULL,
+  `allergen_information` TEXT NULL,
+  `caffeine_content` TEXT NULL,
+  `coffee_product_form` TEXT NULL,
+  `coffee_roast` TEXT NULL,
+  `color` TEXT NULL,
+  `country` TEXT NULL,
+  `dietary_preferences` TEXT NULL,
+  `filter_material` TEXT NULL,
+  `flavor` TEXT NULL,
+  `grind_size` TEXT NULL,
+  `variant_image` TEXT NULL,
+  `variant_weight_limit` TEXT NULL,
+  `variant_tax_code` TEXT NULL,
+  `cost_per_item` DECIMAL(10,2) NULL,
+  `status` TEXT NULL,
+  PRIMARY KEY (`index`))
+ENGINE = InnoDB;
+
 USE `sku_db` ;
 
 -- -----------------------------------------------------
